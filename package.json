@@ -1,0 +1,28 @@
+{
+  "name": "zzzz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "mocha": "./node_modules/mocha/bin/mocha",
+    "test": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5",
+    "request": "^2.88.2",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "nock": "^13.0.11",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}
