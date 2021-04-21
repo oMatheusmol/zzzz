@@ -1,30 +1,20 @@
 const express = require('express')
 require('./db/mongoose')
 const Product = require('./models/product')
-const request = require('request')
-const urlProductStock = "https://mt-node-stock-api.glitch.me/products"
-const bodyParser = require("body-parser");
-
 
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
 app.use(express.json())
 
 app.post("/products", (req, res) => {
-
   const prod = new Product(req.body)
   let num = prod.amount
   let pack =0
   while(num>1000){
     num -= 1000
     pack ++
-  }
-  
+  } 
   prod.amount = num
   prod.packs = pack
 
@@ -55,10 +45,7 @@ app.get("/productsNames", (req, res) => {
   }).catch(e => {
     res.status(500).send()
   })
-
-
-
-});
+})
 
 app.get("/products/:name", (req, res) => {
   let product;
@@ -72,9 +59,7 @@ app.get("/products/:name", (req, res) => {
   }).catch(e => {
     res.status(500).send()
   })
-
-
-});
+})
 
 app.delete("/products/:id", async (req, res) => { //Deleta pelo id e nao pelo nome
   try {
@@ -82,30 +67,24 @@ app.delete("/products/:id", async (req, res) => { //Deleta pelo id e nao pelo no
     if (!prod) {
       return res.status(404).send()
     }
-
     res.send(prod)
   } catch (e) {
     res.status(500).send()
   }
-
 })
 
 const server = app.listen(port, () => {
   console.log("Listening on port %s", server.address().port);
   console.log('http://localhost:%s', server.address().port)
-});
+})
 
-const buildProduct = (body) => {
-  
+const buildProduct = (body) => {  
   return {
     name: body.name,
     price: Number(body.price, 10),
     amount: body.amount,
     packs: body.packs
   }
-
 }
 
-module.exports = {buildProduct,
-  server
-}
+module.exports = {buildProduct, server}

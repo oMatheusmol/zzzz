@@ -12,13 +12,10 @@ describe('Testes:', () => {
       price: "120",
       amount: '165265456'
     }
-
     const result = new Product(body);
     assert.strictEqual(result.name, body.name);
     assert.strictEqual(result.price, Number.parseInt(body.price));
     assert.strictEqual(result.amount,Number.parseInt(body.amount));
-
-
   })
 
   it('Teste 2', (done) => {
@@ -31,9 +28,7 @@ describe('Testes:', () => {
         name: 'teste-p',
         price: '351',
         amount: '450',
-      })
-      
-      
+      })   
       .expect(201)
       .end(done)
   })
@@ -49,8 +44,6 @@ describe('Testes:', () => {
         price: '110.59',
         amount: '484654',
       })
-      
-      
       .expect(201)
       .end(done)
   })
@@ -66,8 +59,6 @@ describe('Testes:', () => {
         price: '568.5',
         amount: '604',
       })
-      
-      
       .expect(201)
       .end(done)
   })
@@ -82,9 +73,7 @@ describe('Testes:', () => {
         name: 'galinha',
         price: '284',
         amount: '1060',
-      })
-      
-      
+      })     
       .expect(201)
       .end(done)
   })
@@ -100,8 +89,6 @@ describe('Testes:', () => {
         price: '48',
         amount: '3145',
       })
-      
-      
       .expect(201)
       .end(done)
   })
@@ -117,8 +104,6 @@ describe('Testes:', () => {
         price: '755',
         amount: '157',
       })
-      
-      
       .expect(201)
       .end(done)
   })
