@@ -16,7 +16,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.post("/products", (req, res) => {
+
   const prod = new Product(req.body)
+  let num = prod.amount
+  let pack =0
+  while(num>1000){
+    num -= 1000
+    pack ++
+  }
+  
+  prod.amount = num
+  prod.packs = pack
+
   prod.save().then(() => {
     res.send(prod)
   }).catch(e => {
@@ -85,12 +96,12 @@ const server = app.listen(port, () => {
 });
 
 const buildProduct = (body) => {
- 
+  
   return {
-    _id: body._id,
     name: body.name,
-    price: body.price,
-    amount: body.amount
+    price: Number(body.price, 10),
+    amount: body.amount,
+    packs: body.packs
   }
 
 }

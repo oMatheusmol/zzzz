@@ -29,43 +29,10 @@ const Product = mongoose.model('Product',{
                 throw new Error('Price must be a possitive number!')
             }
         }
+    },
+    packs: {
+        type:Number
     }
 })
-
-const cachorro = new Product({   
-    name: 'cachorro', price: 110.59, amount: 484654
-})
-const gato = new Product({  
-    name: 'gato', price: 568.5, amount: 604
-})
-
-const galinha = new Product({  
-    name: 'galinha', price: 284, amount: 1060 
-})
-const peixe = new Product({  
-    name: 'peixe', price: 48, amount: 3145 
-})
-const macaco = new Product({  
-    name: 'macaco', price: 755, amount: 157 
-})
-
-
-cachorro.save().catch(e =>{
-    return 'Error'
-})
-gato.save().catch(e =>{
-    return 'Error'
-})
-galinha.save().catch(e =>{
-    return 'Error'
-})
-peixe.save().catch(e =>{
-    return 'Error'
-})
-macaco.save().catch(e =>{
-    return 'Error'
-})
-
-
 
 module.exports = Product

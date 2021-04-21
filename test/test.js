@@ -37,8 +37,93 @@ describe('Testes:', () => {
       .expect(201)
       .end(done)
   })
+
+  it('Teste cachorro', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(201);
+    supertest(index.server)
+      .post('/products')
+      .send({
+        name: 'cachorro',
+        price: '110.59',
+        amount: '484654',
+      })
+      
+      
+      .expect(201)
+      .end(done)
+  })
+
+  it('Teste gato', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(201);
+    supertest(index.server)
+      .post('/products')
+      .send({
+        name: 'gato',
+        price: '568.5',
+        amount: '604',
+      })
+      
+      
+      .expect(201)
+      .end(done)
+  })
+
+  it('Teste galinha', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(201);
+    supertest(index.server)
+      .post('/products')
+      .send({
+        name: 'galinha',
+        price: '284',
+        amount: '1060',
+      })
+      
+      
+      .expect(201)
+      .end(done)
+  })
+
+  it('Teste peixe', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(201);
+    supertest(index.server)
+      .post('/products')
+      .send({
+        name: 'peixe',
+        price: '48',
+        amount: '3145',
+      })
+      
+      
+      .expect(201)
+      .end(done)
+  })
+
+  it('Teste macaco', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(201);
+    supertest(index.server)
+      .post('/products')
+      .send({
+        name: 'macaco',
+        price: '755',
+        amount: '157',
+      })
+      
+      
+      .expect(201)
+      .end(done)
+  })
   
-  it('Teste 4', (done) => {
+  it('Teste 3', (done) => {
     supertest(index.server)
       .get('/products/teste-p')
       .expect(200)
@@ -53,6 +138,7 @@ describe('Testes:', () => {
       { name: 'teste-p', price: 351 },
       { name: 'macaco', price:755},
       { name: 'peixe', price:48}
+
     ]
     resultadoEsperado.sort((a, b) => a.price - b.price)
     let newarr = []
