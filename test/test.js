@@ -21,7 +21,7 @@ describe('Testes:', () => {
   it('Teste 2', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -29,14 +29,14 @@ describe('Testes:', () => {
         price: '351',
         amount: '450',
       })   
-      .expect(201)
+      .expect(200)
       .end(done)
   })
 
   it('Teste cachorro', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -44,14 +44,14 @@ describe('Testes:', () => {
         price: '110.59',
         amount: '484654',
       })
-      .expect(201)
+      .expect(200)
       .end(done)
   })
 
   it('Teste gato', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -59,14 +59,14 @@ describe('Testes:', () => {
         price: '568.5',
         amount: '604',
       })
-      .expect(201)
+      .expect(200)
       .end(done)
   })
 
   it('Teste galinha', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -74,14 +74,14 @@ describe('Testes:', () => {
         price: '284',
         amount: '1060',
       })     
-      .expect(201)
+      .expect(200)
       .end(done)
   })
 
   it('Teste peixe', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -89,14 +89,14 @@ describe('Testes:', () => {
         price: '48',
         amount: '3145',
       })
-      .expect(201)
+      .expect(200)
       .end(done)
   })
 
   it('Teste macaco', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
-      .reply(201);
+      .reply(200);
     supertest(index.server)
       .post('/products')
       .send({
@@ -104,7 +104,7 @@ describe('Testes:', () => {
         price: '755',
         amount: '157',
       })
-      .expect(201)
+      .expect(200)
       .end(done)
   })
   
