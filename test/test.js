@@ -55,36 +55,6 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Post gato', (done) => {
-    nock('https://mt-node-stock-api.glitch.me')
-      .post('/products')
-      .reply(200);
-    supertest(index.server)
-      .post('/products')
-      .send({
-        name: 'gato',
-        price: '568.5',
-        amount: '604',
-      })
-      .expect(200)
-      .end(done)
-  })
-
-  it('Post galinha', (done) => {
-    nock('https://mt-node-stock-api.glitch.me')
-      .post('/products')
-      .reply(200);
-    supertest(index.server)
-      .post('/products')
-      .send({
-        name: 'galinha',
-        price: '284',
-        amount: '1060',
-      })     
-      .expect(200)
-      .end(done)
-  })
-
   it('Post peixe', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
@@ -174,8 +144,6 @@ describe('Testes:', () => {
   it('Teste da rota productNames', (done) => {
     const resultadoEsperado = [
       { name: 'cachorro', price: 110.59 },
-      { name: 'gato', price: 568.5 },
-      { name: 'galinha', price: 284 },
       { name: 'leao', price:1000},
       { name: 'vaca', price:75}
 
