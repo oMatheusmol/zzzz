@@ -6,11 +6,11 @@ const supertest = require('supertest')
 const nock = require('nock')
 
 describe('Testes:', () => {
-  it('Teste 1', () => {
+  it('Teste-unitario', () => {
     const body = {
       name: "teste-unitario",
       price: "120",
-      amount: '165265456'
+      amount: '159'
     }
     const result = new Product(body);
     assert.strictEqual(result.name, body.name);
@@ -18,7 +18,7 @@ describe('Testes:', () => {
     assert.strictEqual(result.amount,Number.parseInt(body.amount));
   })
 
-  it('Teste 2', (done) => {
+  it('Post teste-p', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -33,7 +33,14 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Teste cachorro', (done) => {
+  it('Get /products/teste-p', (done) => {
+    supertest(index.server)
+      .get('/products/teste-p')
+      .expect(200)
+      .end(done)
+  })
+
+  it('Post cachorro', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -48,7 +55,7 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Teste gato', (done) => {
+  it('Post gato', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -63,7 +70,7 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Teste galinha', (done) => {
+  it('Post galinha', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -78,7 +85,7 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Teste peixe', (done) => {
+  it('Post peixe', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -93,7 +100,7 @@ describe('Testes:', () => {
       .end(done)
   })
 
-  it('Teste macaco', (done) => {
+  it('Post macaco', (done) => {
     nock('https://mt-node-stock-api.glitch.me')
       .post('/products')
       .reply(200);
@@ -108,21 +115,69 @@ describe('Testes:', () => {
       .end(done)
   })
   
-  it('Teste 3', (done) => {
+
+  it('Patch peixe para vaca', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
     supertest(index.server)
-      .get('/products/teste-p')
+      .patch('/products/peixe')
+      .send({
+        name: 'vaca',
+        price: '75',
+        amount: '7',
+      })
       .expect(200)
       .end(done)
   })
 
-  it('Teste da rota productNames - deve retornar lista completa de produtos existentes', (done) => {
+  it('Patch macaco para leao', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
+    supertest(index.server)
+      .patch('/products/macaco')
+      .send({
+        name: 'leao',
+        price: '1000',
+        amount: '42',
+      })
+      .expect(200)
+      .end(done)
+  })
+
+  it('Get /products/vaca', (done) => {
+    supertest(index.server)
+      .get('/products/vaca')
+      .expect(200)
+      .end(done)
+  })
+
+  it('Get /products/leao', (done) => {
+    supertest(index.server)
+      .get('/products/leao')
+      .expect(200)
+      .end(done)
+  })
+
+  it('Delete teste-p', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
+    supertest(index.server)
+      .delete('/products/teste-p')
+      .send()
+      .expect(200)
+      .end(done)
+  })
+
+  it('Teste da rota productNames', (done) => {
     const resultadoEsperado = [
       { name: 'cachorro', price: 110.59 },
       { name: 'gato', price: 568.5 },
       { name: 'galinha', price: 284 },
-      { name: 'teste-p', price: 351 },
-      { name: 'macaco', price:755},
-      { name: 'peixe', price:48}
+      { name: 'leao', price:1000},
+      { name: 'vaca', price:75}
 
     ]
     resultadoEsperado.sort((a, b) => a.price - b.price)
