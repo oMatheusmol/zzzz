@@ -1,57 +1,58 @@
 const express = require('express')
 const router = new express.Router()
 const Product = require('../models/product')
-const auth = require('../middleware/auth')
+const {findOne,findAll} = require('../middleware/findProd')
+const {auth,createProd} = require('../middleware/auth')
 
-router.post("/products", auth, async(req, res) => {
-    res.status(200).send()
-  })
-  
-  router.get("/products", async(req, res) => {
-    await Product.find({}).then(prod => {
-      res.send(prod)
-    }).catch(e => {
-      res.status(500).send()
-    })
-  })
-  
-  router.get("/productsNames", async(req, res) => {
-    await Product.find({}).then(prods => {
-      prods.sort((a, b) => a.price - b.price)
-      let newarr = []
-      for (let prod in prods) {
-        newarr.push((prods[prod].name))
-      }
-      res.status(200).send(newarr)
-    }).catch(e => {
-      res.status(500).send()
-    })
-  })
-  
-  router.get("/products/:name", async(req, res) => {
-    let product;
-    await Product.find({}).then(prod => {
-      prod.forEach(element => {
-        if (element.name === req.params.name) {
-          product = element;
-        }
-      })
-      res.status(200).send(product)
-    }).catch(e => {
-      res.status(500).send()
-    })
-  })
-  
-  router.delete("/products/:id", async (req, res) => { //Deleta pelo id e nao pelo nome
-    try {
-      const prod = await Product.findByIdAndDelete(req.params.id)
-      if (!prod) {
-        return res.status(404).send()
-      }
-      res.send(prod)
-    } catch (e) {
-      res.status(500).send()
+router.post("/products", createProd, async (req, res) => {
+  res.status(200).send()
+})
+
+router.get("/products", findAll, async (req, res) => {
+  res.status(200).send(req.session)
+})
+
+router.get("/productsNames", findAll, async (req, res) => {
+  try {
+    let prods = await req.session
+    prods.sort((a, b) => a.price - b.price)
+    let newarr = []
+    for (let prod in prods) {
+      newarr.push((prods[prod].name))
     }
-  })
+    res.status(200).send(newarr)
+  } catch {
+    res.status(500).send()
+  }
+})
+
+router.get("/products/:name", findOne, async (req, res) => {
+  res.status(200).send(req.prod)
+})
+
+router.delete("/products/:name", findOne, async (req, res) => {
+    await Product.deleteOne(req.prod)
+    res.send('Product deleted!')
+})
+
+router.patch('/products/:name', findOne, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowUpdates= ['name','price','amount']
+    const isValidOperation = updates.every((update)=> allowUpdates.includes(update))
+
+    if(!isValidOperation){
+        return res.status(400).send( {error: 'Invalid updates!'})
+    }
+
+    try{
+        updates.forEach(update => req.prod[update] = req.body[update])
+        await req.prod.save()
+        auth(req.prod)
+        res.send(req.prod)
+        next()
+    }catch(e){
+        res.status(400).send()
+    }
+})
 
 module.exports = router
