@@ -158,4 +158,38 @@ describe('Testes:', () => {
       .expect(200, newarr)
       .end(done)
   })
+
+  it('Delete cachorro', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
+    supertest(index.server)
+      .delete('/products/cachorro')
+      .send()
+      .expect(200)
+      .end(done)
+  })
+
+  it('Delete leao', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
+    supertest(index.server)
+      .delete('/products/leao')
+      .send()
+      .expect(200)
+      .end(done)
+  })
+
+  it('Delete vaca', (done) => {
+    nock('https://mt-node-stock-api.glitch.me')
+      .post('/products')
+      .reply(200);
+    supertest(index.server)
+      .delete('/products/vaca')
+      .send()
+      .expect(200)
+      .end(done)
+  })
+
 })
