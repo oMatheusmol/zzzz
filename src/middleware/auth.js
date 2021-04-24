@@ -1,23 +1,3 @@
-const Product = require('../models/product')
-
-const createProd = async (req, res, next) => {
-    try {
-
-        const prod = await new Product(req.body)
-        auth(prod)
-        prod.save().then(() => {
-            res.send(prod)
-        }).catch(e => {
-            console.log(e)
-        })
-
-        next()
-
-    } catch (e) {
-        res.status(401).send({ error: 'Error.' })
-    }
-}
-
 const auth = (prod)=>{
     try {
         const price = Number(prod.price)
@@ -39,7 +19,4 @@ const auth = (prod)=>{
 
 }
 
-module.exports = {
-    auth,
-    createProd
-}
+module.exports = {auth}

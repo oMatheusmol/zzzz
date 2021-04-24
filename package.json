@@ -9,7 +9,7 @@
     "start": "node src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "<matheusmol@hotmail.com>",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -24,5 +24,6 @@
     "nock": "^13.0.11",
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
-  }
+  },
+  "repository": "https://github.com/oMatheusmol/zzzz.git"
 }
